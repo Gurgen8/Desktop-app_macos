@@ -4,12 +4,12 @@ const {TestModule} = NativeModules;
 
 interface ITestModule {
   getDeviceAttributes(
-    successCallback: (res: any) => void,
-    errorCallback: (error: any) => void,
+    successCallback: (success: unknown) => void,
+    errorCallback: (error: unknown) => void,
   ): void;
   getDeviceID(
-    successCallback: (res: any) => void,
-    errorCallback: (error: any) => void,
+    successCallback: (success: unknown) => void,
+    errorCallback: (error: unknown) => void,
   ): void;
 }
 
