@@ -1,56 +1,58 @@
 import React, {useEffect, useState} from 'react';
-import {View, Button, Text, NativeModules} from 'react-native';
+import {View, Button, Text} from 'react-native';
 import {styles} from './styles';
-import TestModule from '../modules/test-module';
-const VPNManager = NativeModules;
+import {
+  configureVPN,
+  connectVPN,
+  disconnectVPN,
+  getVPNStatus,
+  onVPNStatusChange,
+  removeVPNStatusListener,
+} from '../modules/vpn-manager-module';
 
 export const HomeScreen = () => {
-  const [vpnStatus, setVpnStatus] = useState<boolean>(false);
-
-  const toggleVPN = async () => {
-    try {
-      if (vpnStatus) {
-        await VPNManager.disconnect();
-      } else {
-        await VPNManager.connect();
-      }
-      setVpnStatus(!vpnStatus);
-    } catch (error) {
-      console.error('Error toggling VPN:', error);
-    }
-  };
-
-  const getStatus = async () => {
-    try {
-      const status = await VPNManager.getStatus();
-      console.log(status);
-      setVpnStatus(status === 'connected');
-    } catch (error) {
-      console.error('Error getting VPN status:', error);
-    }
-  };
+  const [vpnStatus, setVpnStatus] = useState<string>('');
 
   useEffect(() => {
-    TestModule.getDeviceID(
-      success => {
-        console.log(success, 'success');
-      },
-      error => {
-        console.log(error, 'error');
-      },
-    );
+    const listener = (newStatus: React.SetStateAction<string>) => {
+      setVpnStatus(newStatus);
+    };
+
+    onVPNStatusChange(listener);
+
+    return () => {
+      removeVPNStatusListener();
+    };
   }, []);
+
+  const setupVPN = async () => {
+    await configureVPN({
+      serverAddress: 'vpn.example.com',
+      username: 'your-username',
+      password: 'your-password',
+    });
+  };
+
+  const connect = async () => {
+    await connectVPN();
+    const currentStatus = await getVPNStatus();
+    setVpnStatus(currentStatus);
+  };
+
+  const disconnect = async () => {
+    await disconnectVPN();
+    const currentStatus = await getVPNStatus();
+    setVpnStatus(currentStatus);
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.statusText}>
-        VPN Status: {vpnStatus ? 'Connected' : 'Disconnected'}
+        VPN Status: {vpnStatus ? vpnStatus : 'Disconnected'}
       </Text>
-      <Button
-        title={vpnStatus ? 'Disconnect VPN' : 'Connect VPN'}
-        onPress={toggleVPN}
-      />
-      <Button title="Check VPN Status" onPress={getStatus} />
+      <Button title={'Connect VPN'} onPress={connect} />
+      <Button title={'Disconnect VPN'} onPress={disconnect} />
+      <Button title="Setup VPN" onPress={setupVPN} />
     </View>
   );
 };
