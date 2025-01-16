@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "clean:build": "rm -rf node_modules macos/Pods macos/build && yarn && cd macos && pod setup && pod install"
   },
   "dependencies": {
     "react": "18.2.0",
