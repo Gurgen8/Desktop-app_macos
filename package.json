@@ -9,12 +9,14 @@
     "start": "react-native start",
     "test": "jest",
     "postinstall": "patch-package",
-    "clean:build": "rm -rf node_modules macos/Pods macos/build && yarn && cd macos && pod setup && pod install"
+    "clean:build": "rm -rf node_modules macos/Pods macos/build && yarn && cd macos && pod setup && pod install",
+    "windows": "npx @react-native-community/cli run-windows"
   },
   "dependencies": {
     "react": "18.2.0",
-    "react-native": "0.71.0",
-    "react-native-macos": "^0.71.36"
+    "react-native": "^0.71.0",
+    "react-native-macos": "^0.71.36",
+    "react-native-windows": "^0.76.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -33,7 +35,8 @@
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.4.1",
     "react-test-renderer": "18.2.0",
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "metro-config": "^0.73.10"
   },
   "jest": {
     "preset": "react-native"
