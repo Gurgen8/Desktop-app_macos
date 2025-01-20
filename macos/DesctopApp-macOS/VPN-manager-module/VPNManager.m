@@ -4,20 +4,12 @@
 #import "VPNManager.h"
 #import <NetworkExtension/NetworkExtension.h>
 
-
-
 @implementation VPNManager {
   NETunnelProviderManager *vpnManager;
 }
 
 
-
 RCT_EXPORT_MODULE();
-
-- (BOOL)requiresMainQueueSetup
-{
-  return false;
-}
 
 - (instancetype)init {
   self = [super init];
@@ -37,33 +29,81 @@ RCT_EXPORT_MODULE();
   }];
 }
 
-RCT_EXPORT_METHOD(configureVPN:(NSDictionary *)config resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-  if (!vpnManager) {
-    reject(@"no_manager", @"VPN Manager is not initialized", nil);
-    return;
-  }
+RCT_EXPORT_METHOD(connectVPN:(RCTResponseSenderBlock)callback) {
+    NEVPNManager *vpnManager = [NEVPNManager sharedManager];
   
-  vpnManager.localizedDescription = @"My VPN";
-  NEVPNProtocolIKEv2 *protocol = [[NEVPNProtocolIKEv2 alloc] init];
-  
-  protocol.serverAddress = config[@"serverAddress"];
-  protocol.username = config[@"username"];
-  protocol.passwordReference = [self keychainReferenceFor:config[@"password"]];
-  protocol.authenticationMethod = NEVPNIKEAuthenticationMethodNone;
-  protocol.useExtendedAuthentication = YES;
-  protocol.disconnectOnSleep = NO;
-  
-  vpnManager.protocolConfiguration = protocol;
-  vpnManager.enabled = YES;
-  
-  [vpnManager saveToPreferencesWithCompletionHandler:^(NSError *error) {
-    if (error) {
-      reject(@"save_error", @"Failed to save VPN configuration", error);
-    } else {
-      resolve(@"VPN configuration saved successfully");
-    }
-  }];
+    [vpnManager loadFromPreferencesWithCompletionHandler:^(NSError *error) {
+        if (error != nil) {
+            callback(@[@"Ошибка загрузки настроек VPN", error.localizedDescription]);
+            return;
+        }
+
+        // Настройка VPN-подключения
+        NEVPNProtocolIKEv2 *vpnProtocol = [[NEVPNProtocolIKEv2 alloc] init];
+        vpnProtocol.username = @"yourUsername";
+        vpnProtocol.passwordReference = @"password"; 
+        vpnProtocol.serverAddress = @"vpn.server.com";
+        vpnProtocol.remoteIdentifier = @"vpn.server.com";
+        vpnProtocol.localIdentifier = @"localIdentifier";
+        vpnManager.protocolConfiguration = vpnProtocol;
+        vpnManager.enabled = YES;
+        NSLog(@"console.log");
+        
+        // Сохранение настроек VPN и подключение
+         [vpnManager saveToPreferencesWithCompletionHandler:^(NSError *error) {
+
+        // // Запуск VPN-подключения
+            NSError *startError = nil;
+            [vpnManager.connection startVPNTunnelAndReturnError:&startError];
+            
+            if (startError != nil) {
+                callback(@[@"Ошибка при подключении к VPN", startError.localizedDescription]);
+            } else {
+                callback(@[@"VPN подключен успешно"]);
+            }
+        }];
+    }];
 }
+
+// RCT_EXPORT_METHOD(configureVPN:(NSDictionary *)config resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+//   if (!vpnManager) {
+//     reject(@"no_manager", @"VPN Manager is not initialized", nil);
+//     return;
+//   }
+//   NSLog(@"Received VPN Config: %@", config);
+  
+//   vpnManager.localizedDescription = @"My VPN";
+//   NEVPNProtocolIKEv2 *protocol = [[NEVPNProtocolIKEv2 alloc] init];
+  
+//   // Установка параметров конфигурации
+//   protocol.serverAddress = config[@"serverAddress"];
+//   protocol.username = config[@"username"];
+//   protocol.password = config[@"password"];
+
+//   // Установка ссылки на пароль (должна быть ссылка из keychain)
+//   NSData *passwordReference = [self getPasswordReferenceForKey:config[@"password"]];
+//   if (!passwordReference) {
+//     reject(@"invalid_password", @"Failed to retrieve password reference from keychain", nil);
+//     return;
+//   }
+//   protocol.passwordReference = passwordReference;
+
+//   // Установка метода аутентификации
+//   protocol.authenticationMethod = NEVPNIKEAuthenticationMethodNone;
+//   protocol.useExtendedAuthentication = YES;
+//   protocol.disconnectOnSleep = NO;
+
+//   vpnManager.protocolConfiguration = protocol;
+//   vpnManager.enabled = YES;
+
+//   [vpnManager saveToPreferencesWithCompletionHandler:^(NSError *error) {
+//     if (error) {
+//       reject(@"save_error", @"Failed to save VPN configuration", error);
+//     } else {
+//       resolve(@"VPN configuration saved successfully");
+//     }
+//   }];
+// }
 
 RCT_EXPORT_METHOD(connect:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
   if (!vpnManager) {
@@ -130,6 +170,5 @@ RCT_EXPORT_METHOD(getStatus:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromise
   return @[@"VPNStatusChanged"];
 }
 
-
-
 @end
+

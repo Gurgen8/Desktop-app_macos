@@ -9,7 +9,6 @@ RCT_EXPORT_MODULE(TestModule);
 RCT_EXPORT_METHOD(getDeviceID: (RCTResponseSenderBlock)successCallback errorCallback: (RCTResponseSenderBlock)errorCallback)
 {
   @try{
-    // Implement get device id logic
     NSString *deviceID = @ "testdeviceId-456";
     successCallback(@[deviceID]);
   }
@@ -22,7 +21,6 @@ RCT_EXPORT_METHOD(getDeviceID: (RCTResponseSenderBlock)successCallback errorCall
 RCT_EXPORT_METHOD(getDeviceAttributes: (RCTResponseSenderBlock)successCallback errorCallback: (RCTResponseSenderBlock)errorCallback)
 {
   @try{
-    // Implement get device attributes logic
     NSDictionary *deviceAttributes = @{
       @"isDeviceRooted": @"IOSTestRooted",
       @"isDevModeEnabled": @"IOSDevMode",

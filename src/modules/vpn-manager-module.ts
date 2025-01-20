@@ -2,14 +2,15 @@ import {NativeModules, NativeEventEmitter} from 'react-native';
 
 const {VPNManager} = NativeModules;
 const VPNEvents = new NativeEventEmitter(VPNManager);
-console.log(VPNManager, 'vvvvv');
 
-export const configureVPN = async (config: object) => {
+export const configureVPN = async () => {
   try {
-    const response = await VPNManager.configureVPN(config);
+    const response = await VPNManager.connectVPN((message: string) =>
+      console.log(message),
+    );
     return response;
   } catch (error) {
-    throw error;
+    console.log(error, 'ERROR');
   }
 };
 

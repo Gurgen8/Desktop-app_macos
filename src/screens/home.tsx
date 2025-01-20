@@ -26,11 +26,7 @@ export const HomeScreen = () => {
   }, []);
 
   const setupVPN = async () => {
-    await configureVPN({
-      serverAddress: 'vpn.example.com',
-      username: 'your-username',
-      password: 'your-password',
-    });
+    await configureVPN();
   };
 
   const connect = async () => {

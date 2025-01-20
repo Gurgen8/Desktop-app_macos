@@ -1,7 +1,6 @@
 import {NativeModules} from 'react-native';
 
 const {TestModule} = NativeModules;
-console.log(TestModule, 'aa');
 
 interface ITestModule {
   getDeviceAttributes(
