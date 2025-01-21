@@ -13,6 +13,8 @@
 		514201552437B4B40078DB4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 514201532437B4B40078DB4F /* Main.storyboard */; };
 		514201582437B4B40078DB4F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 514201572437B4B40078DB4F /* main.m */; };
 		953E05F72D3E90EC007AEFF6 /* LeafVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 953E05F62D3E90EC007AEFF6 /* LeafVPNManager.m */; };
+		953E05F92D3F9DAD007AEFF6 /* leaf in Resources */ = {isa = PBXBuildFile; fileRef = 953E05F82D3F9DAD007AEFF6 /* leaf */; };
+		953E05FA2D3F9DD5007AEFF6 /* leaf in Resources */ = {isa = PBXBuildFile; fileRef = 953E05F82D3F9DAD007AEFF6 /* leaf */; };
 		95C5CBD42D3930E2003C8BC4 /* TestModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C5CBD32D3930E2003C8BC4 /* TestModule.m */; };
 		95C5CBD92D3943B8003C8BC4 /* VPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C5CBD82D3943B8003C8BC4 /* VPNManager.m */; };
 /* End PBXBuildFile section */
@@ -31,6 +33,7 @@
 		514201592437B4B40078DB4F /* DesctopApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DesctopApp.entitlements; sourceTree = "<group>"; };
 		953E05F52D3E905F007AEFF6 /* LeafVPNManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeafVPNManager.h; sourceTree = "<group>"; };
 		953E05F62D3E90EC007AEFF6 /* LeafVPNManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeafVPNManager.m; sourceTree = "<group>"; };
+		953E05F82D3F9DAD007AEFF6 /* leaf */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = leaf; sourceTree = "<group>"; };
 		95C5CBD22D393011003C8BC4 /* TestModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestModule.h; sourceTree = "<group>"; };
 		95C5CBD32D3930E2003C8BC4 /* TestModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestModule.m; sourceTree = "<group>"; };
 		95C5CBD52D3941A9003C8BC4 /* DesctopApp-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "DesctopApp-iOS.entitlements"; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 				95C5CBD62D3942CD003C8BC4 /* VPN-manager-module */,
 				95C5CBD12D392FCB003C8BC4 /* TestModule */,
 				5142014B2437B4B30078DB4F /* AppDelegate.h */,
+				953E05F82D3F9DAD007AEFF6 /* leaf */,
 				5142014C2437B4B30078DB4F /* AppDelegate.mm */,
 				514201512437B4B40078DB4F /* Assets.xcassets */,
 				514201532437B4B40078DB4F /* Main.storyboard */,
@@ -237,6 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				953E05FA2D3F9DD5007AEFF6 /* leaf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +251,7 @@
 			files = (
 				514201522437B4B40078DB4F /* Assets.xcassets in Resources */,
 				514201552437B4B40078DB4F /* Main.storyboard in Resources */,
+				953E05F92D3F9DAD007AEFF6 /* leaf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

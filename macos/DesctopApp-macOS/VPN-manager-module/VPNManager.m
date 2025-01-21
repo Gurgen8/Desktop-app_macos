@@ -47,7 +47,7 @@ RCT_EXPORT_METHOD(connectVPN:(RCTResponseSenderBlock)callback) {
         vpnProtocol.localIdentifier = @"localIdentifier";
         vpnManager.protocolConfiguration = vpnProtocol;
         vpnManager.enabled = YES;
-        NSLog(@"console.log");
+
         
         // Сохранение настроек VPN и подключение
          [vpnManager saveToPreferencesWithCompletionHandler:^(NSError *error) {

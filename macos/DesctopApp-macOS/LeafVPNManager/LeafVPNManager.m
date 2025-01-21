@@ -20,6 +20,7 @@ RCT_EXPORT_METHOD(startVPN:(NSString *)config resolver:(RCTPromiseResolveBlock)r
     NSError *writeError;
     [config writeToFile:configPath atomically:YES encoding:NSUTF8StringEncoding error:&writeError];
 
+
     if (writeError) {
         reject(@"config_error", @"Failed to write configuration", writeError);
         return;
@@ -34,8 +35,11 @@ RCT_EXPORT_METHOD(startVPN:(NSString *)config resolver:(RCTPromiseResolveBlock)r
     task.standardOutput = outputPipe;
     task.standardError = outputPipe;
 
+
     [task setTerminationHandler:^(NSTask *task) {
+           NSLog(@"console.log");
         if (task.terminationStatus == 0) {
+
             resolve(@YES);
         } else {
             reject(@"vpn_error", @"Failed to start VPN", nil);
