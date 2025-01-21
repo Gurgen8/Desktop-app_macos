@@ -1,55 +1,36 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {View, Button, Text} from 'react-native';
 import {styles} from './styles';
-import {
-  configureVPN,
-  connectVPN,
-  disconnectVPN,
-  getVPNStatus,
-  onVPNStatusChange,
-  removeVPNStatusListener,
-} from '../modules/vpn-manager-module';
-import {startVPN} from '../modules/leaf-vpn-manager';
+import {startVPN, stopVPN} from '../modules/leaf-vpn-manager';
 
 export const HomeScreen = () => {
   const [vpnStatus, setVpnStatus] = useState<string>('');
 
-  useEffect(() => {
-    const listener = (newStatus: React.SetStateAction<string>) => {
-      setVpnStatus(newStatus);
-    };
-
-    onVPNStatusChange(listener);
-
-    return () => {
-      removeVPNStatusListener();
-    };
-  }, []);
-
-  const setupVPN = async () => {
-    await configureVPN();
-  };
-
-  const connect = async () => {
-    await connectVPN();
-    const currentStatus = await getVPNStatus();
-    setVpnStatus(currentStatus);
+  const connectVpn = async () => {
+    const statusVpn = await startVPN();
+    statusVpn && setVpnStatus('Connected');
   };
 
   const disconnect = async () => {
-    await disconnectVPN();
-    const currentStatus = await getVPNStatus();
-    setVpnStatus(currentStatus);
+    const statusVpn = await stopVPN();
+    statusVpn && setVpnStatus('Disconnected');
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.statusText}>
-        VPN Status: {vpnStatus ? vpnStatus : 'Disconnected'}
+        VPN Status: {vpnStatus ? vpnStatus : '---'}
       </Text>
-      <Button title={'Connect VPN'} onPress={connect} />
-      <Button title={'Disconnect VPN'} onPress={disconnect} />
-      <Button title="Setup VPN" onPress={startVPN} />
+      <Button
+        disabled={vpnStatus === 'Connected'}
+        title={'Connect VPN'}
+        onPress={connectVpn}
+      />
+      <Button
+        disabled={vpnStatus !== 'Connected'}
+        title={'Disconnect VPN'}
+        onPress={disconnect}
+      />
     </View>
   );
 };

@@ -1,11 +1,11 @@
-#ifndef VPNManager_h
-#define VPNManager_h
+// #ifndef VPNManager_h
+// #define VPNManager_h
 
-#import <React/RCTBridgeModule.h>
-@interface VPNManager : NSObject <RCTBridgeModule>
+// #import <React/RCTBridgeModule.h>
+// @interface VPNManager : NSObject <RCTBridgeModule>
 
-- (NSData *)keychainReferenceFor:(NSString *)password;
+// - (NSData *)keychainReferenceFor:(NSString *)password;
 
-@end
+// @end
 
-#endif
+// #endif

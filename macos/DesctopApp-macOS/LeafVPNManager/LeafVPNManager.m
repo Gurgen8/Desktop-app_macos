@@ -34,15 +34,14 @@ RCT_EXPORT_METHOD(startVPN:(NSString *)config resolver:(RCTPromiseResolveBlock)r
     NSPipe *outputPipe = [NSPipe pipe];
     task.standardOutput = outputPipe;
     task.standardError = outputPipe;
-
+    resolve(@YES);
 
     [task setTerminationHandler:^(NSTask *task) {
-           NSLog(@"console.log");
+    //    NSLog(@"Status: %d", task.terminationStatus );
         if (task.terminationStatus == 0) {
-
-            resolve(@YES);
+          resolve(@YES);
         } else {
-            reject(@"vpn_error", @"Failed to start VPN", nil);
+          resolve(@NO);
         }
     }];
 
@@ -52,7 +51,14 @@ RCT_EXPORT_METHOD(startVPN:(NSString *)config resolver:(RCTPromiseResolveBlock)r
 RCT_EXPORT_METHOD(stopVPN:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
     // Убедитесь, что процесс Leaf завершен
+    int status = system("pkill -f leaf");
     system("pkill -f leaf");
-    resolve(@YES);
+
+     if (status == 0) {
+          resolve(@YES);
+    } else {
+      reject(@"config_error", @"Failed to stop VP", nil);
+
+    }
 }
 @end

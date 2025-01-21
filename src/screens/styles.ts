@@ -9,5 +9,6 @@ export const styles = StyleSheet.create({
   statusText: {
     fontSize: 18,
     marginBottom: 20,
+    color: 'red',
   },
 });

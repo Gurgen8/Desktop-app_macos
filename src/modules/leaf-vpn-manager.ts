@@ -3,22 +3,20 @@ import {LeafConfig} from '../config';
 
 const {LeafVPNManager} = NativeModules;
 
-async function startVPN() {
+export const startVPN = async () => {
   try {
     const success = await LeafVPNManager.startVPN(JSON.stringify(LeafConfig));
-    console.log('VPN started:', success);
+    return success;
   } catch (error) {
     console.error('Failed to start VPN:', error);
   }
-}
+};
 
-async function stopVPN() {
+export const stopVPN = async () => {
   try {
     const success = await LeafVPNManager.stopVPN();
-    console.log('VPN stopped:', success);
+    return success;
   } catch (error) {
     console.error('Failed to stop VPN:', error);
   }
-}
-
-export {startVPN, stopVPN};
+};
