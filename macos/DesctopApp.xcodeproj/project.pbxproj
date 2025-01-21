@@ -12,6 +12,7 @@
 		514201522437B4B40078DB4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 514201512437B4B40078DB4F /* Assets.xcassets */; };
 		514201552437B4B40078DB4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 514201532437B4B40078DB4F /* Main.storyboard */; };
 		514201582437B4B40078DB4F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 514201572437B4B40078DB4F /* main.m */; };
+		953E05F72D3E90EC007AEFF6 /* LeafVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 953E05F62D3E90EC007AEFF6 /* LeafVPNManager.m */; };
 		95C5CBD42D3930E2003C8BC4 /* TestModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C5CBD32D3930E2003C8BC4 /* TestModule.m */; };
 		95C5CBD92D3943B8003C8BC4 /* VPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C5CBD82D3943B8003C8BC4 /* VPNManager.m */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,8 @@
 		514201562437B4B40078DB4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		514201572437B4B40078DB4F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		514201592437B4B40078DB4F /* DesctopApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DesctopApp.entitlements; sourceTree = "<group>"; };
+		953E05F52D3E905F007AEFF6 /* LeafVPNManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeafVPNManager.h; sourceTree = "<group>"; };
+		953E05F62D3E90EC007AEFF6 /* LeafVPNManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeafVPNManager.m; sourceTree = "<group>"; };
 		95C5CBD22D393011003C8BC4 /* TestModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestModule.h; sourceTree = "<group>"; };
 		95C5CBD32D3930E2003C8BC4 /* TestModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestModule.m; sourceTree = "<group>"; };
 		95C5CBD52D3941A9003C8BC4 /* DesctopApp-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "DesctopApp-iOS.entitlements"; sourceTree = "<group>"; };
@@ -77,6 +80,7 @@
 		5142014A2437B4B30078DB4F /* DesctopApp-macOS */ = {
 			isa = PBXGroup;
 			children = (
+				953E05F42D3E9022007AEFF6 /* LeafVPNManager */,
 				95C5CBD62D3942CD003C8BC4 /* VPN-manager-module */,
 				95C5CBD12D392FCB003C8BC4 /* TestModule */,
 				5142014B2437B4B30078DB4F /* AppDelegate.h */,
@@ -119,6 +123,15 @@
 				514201492437B4B30078DB4F /* DesctopApp.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		953E05F42D3E9022007AEFF6 /* LeafVPNManager */ = {
+			isa = PBXGroup;
+			children = (
+				953E05F52D3E905F007AEFF6 /* LeafVPNManager.h */,
+				953E05F62D3E90EC007AEFF6 /* LeafVPNManager.m */,
+			);
+			path = LeafVPNManager;
 			sourceTree = "<group>";
 		};
 		95C5CBD12D392FCB003C8BC4 /* TestModule */ = {
@@ -362,6 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				953E05F72D3E90EC007AEFF6 /* LeafVPNManager.m in Sources */,
 				95C5CBD42D3930E2003C8BC4 /* TestModule.m in Sources */,
 				514201582437B4B40078DB4F /* main.m in Sources */,
 				95C5CBD92D3943B8003C8BC4 /* VPNManager.m in Sources */,

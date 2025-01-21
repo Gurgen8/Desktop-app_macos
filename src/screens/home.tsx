@@ -9,6 +9,7 @@ import {
   onVPNStatusChange,
   removeVPNStatusListener,
 } from '../modules/vpn-manager-module';
+import {startVPN} from '../modules/leaf-vpn-manager';
 
 export const HomeScreen = () => {
   const [vpnStatus, setVpnStatus] = useState<string>('');
@@ -48,7 +49,7 @@ export const HomeScreen = () => {
       </Text>
       <Button title={'Connect VPN'} onPress={connect} />
       <Button title={'Disconnect VPN'} onPress={disconnect} />
-      <Button title="Setup VPN" onPress={setupVPN} />
+      <Button title="Setup VPN" onPress={startVPN} />
     </View>
   );
 };

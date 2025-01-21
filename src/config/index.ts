@@ -1,4 +1,4 @@
-export const VPNConfig = {
+export const LeafConfig = {
   log: {
     level: 'trace',
   },
